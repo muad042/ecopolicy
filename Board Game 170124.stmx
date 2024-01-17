@@ -2,7 +2,7 @@
 <xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0" xmlns:isee="http://iseesystems.com/XMILE">
 	<header>
 		<smile version="1.0" namespace="std, isee"/>
-		<name>Board Game 160124</name>
+		<name>Board Game 170124</name>
 		<uuid>a7dc7f68-f510-4003-afd0-05fd6ced8053</uuid>
 		<vendor>isee systems, inc.</vendor>
 		<product version="3.4.1" isee:build_number="3048" isee:saved_by_v1="true" lang="en">Stella Architect</product>
@@ -22,7 +22,7 @@
 	<model>
 		<variables>
 			<stock name="Restoration">
-				<eqn>1</eqn>
+				<eqn>Restoration_Initial</eqn>
 				<inflow>Change_Restoration</inflow>
 				<non_negative/>
 			</stock>
@@ -30,7 +30,7 @@
 				<eqn>Effect_of_restoration_on_restoration+Action_point_to_resroration</eqn>
 			</flow>
 			<stock name="Production">
-				<eqn>12</eqn>
+				<eqn>Production_Initial</eqn>
 				<inflow>Change_Production</inflow>
 				<non_negative/>
 			</stock>
@@ -38,7 +38,7 @@
 				<eqn>Effect_of_Production_on_Production+Action_point_to_Production</eqn>
 			</flow>
 			<stock name="Pollution">
-				<eqn>13</eqn>
+				<eqn>Pollution_Initial</eqn>
 				<inflow>Change_Pollution</inflow>
 				<non_negative/>
 			</stock>
@@ -46,7 +46,7 @@
 				<eqn>Effect_of_Pollution_on_Pollution+Effect_of_Production_on_Pollution+Effect_of_restoration_on_Pollution+Action_point_to_Pollution</eqn>
 			</flow>
 			<stock name="Education">
-				<eqn>4</eqn>
+				<eqn>Education_Initial</eqn>
 				<inflow>Change_Education</inflow>
 				<non_negative/>
 			</stock>
@@ -54,7 +54,7 @@
 				<eqn>Effect_of_Education_on_Education+Action_point_to_Education</eqn>
 			</flow>
 			<stock name="Life Quality">
-				<eqn>10</eqn>
+				<eqn>Life_quality_Initial</eqn>
 				<inflow>Change_Life_Quality</inflow>
 				<non_negative/>
 			</stock>
@@ -62,7 +62,7 @@
 				<eqn>Effect_of_Pollution_on_Life_Quality+Effect_of_Life_Quality_on_Life_Quality+Effect_of_Education_on_Life_Quality+Action_point_to_Life_Quality</eqn>
 			</flow>
 			<stock name="Birth rate">
-				<eqn>20</eqn>
+				<eqn>Birth_rate_Initial</eqn>
 				<inflow>Change_Birth_rate</inflow>
 				<non_negative/>
 			</stock>
@@ -70,7 +70,7 @@
 				<eqn>Effect_of_Education_on_Birth_rate+Effect_of_Life_Quality_on_Birth_rate+Action_point_to_Birth_rate</eqn>
 			</flow>
 			<stock name="Population">
-				<eqn>20</eqn>
+				<eqn>Population_Initial</eqn>
 				<inflow>Change_Population</inflow>
 				<non_negative/>
 			</stock>
@@ -158,7 +158,7 @@
 				</gf>
 			</aux>
 			<stock name="Politic">
-				<eqn>0</eqn>
+				<eqn>Politic_Initial</eqn>
 				<inflow>Change_in_Politic</inflow>
 				<non_negative/>
 			</stock>
@@ -242,6 +242,30 @@
 			<aux name="Action points">
 				<eqn>Effect_of_Production_on_Action_Points+Effect_of_Life_Quality_on_Action_Points+Effect_of_Politic_on_Action_Points+Effect_of_Population_on_Action_Points</eqn>
 			</aux>
+			<aux name="Restoration\nInitial">
+				<eqn>1</eqn>
+			</aux>
+			<aux name="Production\nInitial">
+				<eqn>12</eqn>
+			</aux>
+			<aux name="Life quality\nInitial">
+				<eqn>10</eqn>
+			</aux>
+			<aux name="Politic\nInitial">
+				<eqn>0</eqn>
+			</aux>
+			<aux name="Pollution\nInitial">
+				<eqn>13</eqn>
+			</aux>
+			<aux name="Education\nInitial">
+				<eqn>4</eqn>
+			</aux>
+			<aux name="Birth rate\nInitial">
+				<eqn>20</eqn>
+			</aux>
+			<aux name="Population\nInitial">
+				<eqn>20</eqn>
+			</aux>
 		</variables>
 		<views>
 			<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
@@ -290,7 +314,7 @@
 				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
 				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="false" background="white" page_width="1056" page_height="816" isee:page_cols="3" isee:page_rows="3" isee:scroll_x="11" isee:scroll_y="60" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+			<view isee:show_pages="false" background="white" page_width="1056" page_height="816" isee:page_cols="3" isee:page_rows="3" isee:scroll_x="111" isee:scroll_y="60" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -543,7 +567,7 @@
 					<from>Action_point_to_Life_Quality</from>
 					<to>Change_Life_Quality</to>
 				</connector>
-				<stacked_container uid="49" x="1356" y="383">
+				<stacked_container uid="49" x="1416" y="391">
 					<graph width="350" height="250" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
 						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
 							<entity name="Action_points"/>
@@ -576,6 +600,14 @@
 					<from>Effect_of_Population_on_Action_Points</from>
 					<to>Action_points</to>
 				</connector>
+				<aux x="424.5" y="99" name="Restoration\nInitial"/>
+				<aux x="741.25" y="192" name="Production\nInitial"/>
+				<aux x="767" y="538.5" name="Life quality\nInitial"/>
+				<aux x="915.5" y="733.5" name="Politic\nInitial"/>
+				<aux x="336.5" y="305" name="Pollution\nInitial"/>
+				<aux x="399" y="500" name="Education\nInitial"/>
+				<aux x="480" y="763" name="Birth rate\nInitial"/>
+				<aux x="901" y="916" name="Population\nInitial"/>
 			</view>
 		</views>
 	</model>
