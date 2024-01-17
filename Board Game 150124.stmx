@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0" xmlns:isee="http://iseesystems.com/XMILE">
+	<header>
+		<smile version="1.0" namespace="std, isee"/>
+		<name>Board Game 150124</name>
+		<uuid>a7dc7f68-f510-4003-afd0-05fd6ced8053</uuid>
+		<vendor>isee systems, inc.</vendor>
+		<product version="3.5.1" isee:build_number="3169" isee:saved_by_v1="true" lang="en">Stella Architect</product>
+	</header>
+	<sim_specs isee:sim_duration="1.5" isee:run_prefix="Run" isee:simulation_delay="0.0517241" isee:restore_on_start="false" method="Euler" time_units="Months" isee:instantaneous_flows="false" isee:ignore_module_errors="false" isee:strict_units="true" isee:loop_scores="true" isee:loop_exhaustive_allowed="1000">
+		<start>1</start>
+		<stop>30</stop>
+		<dt reciprocal="true">1</dt>
+	</sim_specs>
+	<isee:prefs saved_runs="5" keep="false" show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" isee:design="Deluxe Prev-Next Blue Green Pastel" isee:design_custom="false" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" rerun_on_structure_change="false" rifp="true"/>
+	<isee:multiplayer_settings include_chat="true" allow_observers="false" advance_time_increment="1" max_advance_time_in_ms="0" model_stops_when_players_drop="false" observer_start_page="home_page" enabled="false"/>
+	<isee:time_formats default_format="Builtin">
+		<isee:time_format name="Builtin" type="adaptive"/>
+	</isee:time_formats>
+	<isee:number_format_extenders/>
+	<default_format/>
+	<model_units/>
+	<model>
+		<variables>
+			<stock name="Restoration">
+				<eqn>1</eqn>
+				<inflow>Change_Restoration</inflow>
+				<non_negative/>
+			</stock>
+			<flow name="Change Restoration">
+				<eqn>Effect_of_restoration_on_restoration+Action_point_to_resroration</eqn>
+			</flow>
+			<stock name="Production">
+				<eqn>12</eqn>
+				<inflow>Change_Production</inflow>
+				<non_negative/>
+			</stock>
+			<flow name="Change Production">
+				<eqn>Effect_of_Production_on_Production+Action_point_to_Production</eqn>
+			</flow>
+			<stock name="Pollution">
+				<eqn>13</eqn>
+				<inflow>Change_Pollution</inflow>
+				<non_negative/>
+			</stock>
+			<flow name="Change Pollution">
+				<eqn>Effect_of_Pollution_on_Pollution+Effect_of_Production_on_Pollution+Effect_of_restoration_on_Pollution+Action_point_to_Pollution</eqn>
+			</flow>
+			<stock name="Education">
+				<eqn>4</eqn>
+				<inflow>Change_Education</inflow>
+				<non_negative/>
+			</stock>
+			<flow name="Change Education">
+				<eqn>Effect_of_Education_on_Education+Action_point_to_Education</eqn>
+			</flow>
+			<stock name="Life Quality">
+				<eqn>10</eqn>
+				<inflow>Change_Life_Quality</inflow>
+				<non_negative/>
+			</stock>
+			<flow name="Change Life Quality">
+				<eqn>Effect_of_Pollution_on_Life_Quality+Effect_of_Life_Quality_on_Life_Quality+Effect_of_Education_on_Life_Quality+Action_point_to_Life_Quality</eqn>
+			</flow>
+			<stock name="Birth rate">
+				<eqn>20</eqn>
+				<inflow>Change_Birth_rate</inflow>
+				<non_negative/>
+			</stock>
+			<flow name="Change Birth rate">
+				<eqn>Effect_of_Education_on_Birth_rate+Effect_of_Life_Quality_on_Birth_rate+Action_point_to_Birth_rate</eqn>
+			</flow>
+			<stock name="Population">
+				<eqn>20</eqn>
+				<inflow>Change_Population</inflow>
+				<non_negative/>
+			</stock>
+			<flow name="Change Population">
+				<eqn>Effect_of_Birth_rate_on_population</eqn>
+			</flow>
+			<aux name="Effect of restoration\non Pollution">
+				<eqn>Restoration</eqn>
+				<gf>
+					<xscale min="0" max="30"/>
+					<yscale min="-10" max="2"/>
+					<ypts>1.94,0,-0.81,-1.1,-1.8,-1.92,-2.39,-2.98,-3.68,-4.97,-10</ypts>
+				</gf>
+			</aux>
+			<aux name="Effect of restoration\non restoration">
+				<eqn>Restoration</eqn>
+				<gf>
+					<xscale min="0" max="30"/>
+					<yscale min="-6" max="2"/>
+					<ypts>0,0,0,0,0,0,-0.302,-1.083,-1.902,-3.893,-4.595</ypts>
+				</gf>
+			</aux>
+			<aux name="Effect of Production\non Production">
+				<eqn>Production</eqn>
+				<gf>
+					<xscale min="0" max="30"/>
+					<yscale min="-6" max="2"/>
+					<ypts>-0.068,-0.146,-0.107,0.361,0.595,0.556,0.868,0.868,0.712,-5.454,-6</ypts>
+				</gf>
+			</aux>
+			<aux name="Effect of Production\non Pollution">
+				<eqn>Production</eqn>
+				<gf>
+					<xscale min="0" max="30"/>
+					<yscale min="0" max="25"/>
+					<ypts>0.059,0.146,0.254,0.351,0.449,0.585,0.771,0.976,1.171,1.502,2</ypts>
+				</gf>
+			</aux>
+			<aux name="Effect of Pollution\non Pollution">
+				<eqn>Pollution</eqn>
+				<gf>
+					<xscale min="0" max="30"/>
+					<yscale min="-6" max="2"/>
+					<ypts>-1.941,-2.488,-2.839,-2.956,-3.19,-4.088,-5.18,-3.932,-2.293,-1.941,-1.941</ypts>
+				</gf>
+			</aux>
+			<aux name="Effect of Education\non Education">
+				<eqn>Education</eqn>
+				<gf>
+					<xscale min="0" max="30"/>
+					<yscale min="-2" max="4"/>
+					<ypts>1.102,0.224,-0.888,-1.239,0.927,1.512,1.746,2.273,1.424,0.898,0.254</ypts>
+				</gf>
+			</aux>
+			<aux name="Effect of Education\non Life Quality">
+				<eqn>Education</eqn>
+				<gf>
+					<xscale min="0" max="30"/>
+					<yscale min="-2" max="6"/>
+					<ypts>-1.727,-1.141,-0.556,0.185,0.966,1.746,2.566,3.541,4.634,5.259,6</ypts>
+				</gf>
+			</aux>
+			<aux name="Effect of Education\non Birth rate">
+				<eqn>Education</eqn>
+				<gf>
+					<xscale min="0" max="30"/>
+					<yscale min="-6" max="6"/>
+					<ypts>2.2,-0.03,0.2,1.79,2.25,2.6,2.96,3.83,4.24,4.65,5.71</ypts>
+				</gf>
+			</aux>
+			<aux name="Effect of Life Quality\non Life Quality">
+				<eqn>Life_Quality</eqn>
+				<gf>
+					<xscale min="0" max="30"/>
+					<yscale min="-4" max="4"/>
+					<ypts>0.059,0.254,-0.02,1.854,1.893,-0.605,-1.971,-0.722,-0.059,0.332,0.254</ypts>
+				</gf>
+			</aux>
+			<aux name="Effect of Life Quality\non Birth rate">
+				<eqn>Life_Quality</eqn>
+				<gf>
+					<xscale min="0" max="30"/>
+					<yscale min="-25" max="2"/>
+					<ypts>-24.74,-16.83,-9.59,1.6,1.87,0.16,0.16,-0.24,0.02,-0.11,-0.5</ypts>
+				</gf>
+			</aux>
+			<stock name="Politic">
+				<eqn>0</eqn>
+				<inflow>Change_in_Politic</inflow>
+				<non_negative/>
+			</stock>
+			<flow name="Change in Politic">
+				<eqn>Effect_of_Life_Quality_on_Politic</eqn>
+			</flow>
+			<aux name="Effect of Life\nQuality on Politic">
+				<eqn>Life_Quality</eqn>
+				<gf>
+					<xscale min="0" max="30"/>
+					<yscale min="-10" max="5"/>
+					<ypts>-8.98,-6.27,-2.54,0.54,1.12,1.27,1.27,1.56,1.71,3.9,5</ypts>
+				</gf>
+			</aux>
+			<aux name="Effect of Birth\nrate on population">
+				<eqn>Birth_rate</eqn>
+				<gf>
+					<xscale min="0" max="30"/>
+					<yscale min="-15" max="15"/>
+					<ypts>-9.15,-7.24,-4.02,-1.24,1.54,4.02,6.37,8.12,9.59,10.17,10.32</ypts>
+				</gf>
+			</aux>
+			<aux name="Effect of Pollution\non Life Quality">
+				<eqn>Pollution</eqn>
+				<gf>
+					<xscale min="0" max="30"/>
+					<yscale min="-30" max="1"/>
+					<ypts>-0.36,-0.21,-0.66,-0.21,-0.97,-1.87,-2.48,-3.99,-5.65,-7.92,-30</ypts>
+				</gf>
+			</aux>
+			<aux name="Effect of Population\non Action Points">
+				<eqn>Population</eqn>
+				<gf>
+					<xscale min="0" max="60"/>
+					<yscale min="-10" max="10"/>
+					<ypts>-0.24,0.34,1.51,2.1,2.59,3.07,4.34,5.8,7.66,9.32,10</ypts>
+				</gf>
+			</aux>
+			<aux name="Effect of Politic\non Action Points">
+				<eqn>Politic</eqn>
+				<gf>
+					<xscale min="-10" max="40"/>
+					<yscale min="-10" max="5"/>
+					<ypts>-10,-8.46,-4.44,-1.66,-1,-1,-0.78,-0.34,-0.05,1.71,5</ypts>
+				</gf>
+			</aux>
+			<aux name="Effect of Production\non Action Points">
+				<eqn>Production</eqn>
+				<gf>
+					<xscale min="0" max="30"/>
+					<yscale min="-5" max="10"/>
+					<ypts>-4.49,-3.17,-1.78,1,3.05,4.59,6.05,7.37,10,7.73,-5</ypts>
+				</gf>
+			</aux>
+			<aux name="Effect of Life Qulilty\non Action Points">
+				<eqn>Life_Quality</eqn>
+				<gf>
+					<xscale min="0" max="30"/>
+					<yscale min="-8" max="8"/>
+					<ypts>-5.89,0.27,1.83,2.38,2.61,3.16,3.71,4.18,4.8,5.11,7.92</ypts>
+				</gf>
+			</aux>
+			<aux name="Action point to resroration">
+				<eqn>0</eqn>
+			</aux>
+			<aux name="Action point to Production">
+				<eqn>0</eqn>
+			</aux>
+			<aux name="Action point to Pollution">
+				<eqn>0</eqn>
+			</aux>
+			<aux name="Action point to Education">
+				<eqn>0</eqn>
+			</aux>
+			<aux name="Action point to Life Quality">
+				<eqn>0</eqn>
+			</aux>
+			<aux name="Action point to Birth rate">
+				<eqn>0</eqn>
+			</aux>
+			<aux name="Action points">
+				<eqn>Effect_of_Production_on_Action_Points+Effect_of_Life_Qulilty_on_Action_Points+Effect_of_Politic_on_Action_Points+Effect_of_Population_on_Action_Points</eqn>
+			</aux>
+		</variables>
+		<views>
+			<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
+				<text_box color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+				<isee:loop_indicator color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+				<numeric_display color="white" background="white" font_size="12pt" border_width="thin" border_style="solid" isee:transparent="false" isee:show_divider="true" isee:show_bounding_box="true" label_side="left"/>
+				<graph color="black" background="white" font_size="12pt" axis_color="#666666" grid_color="#C8C8C8" isee:graph_area_color="white" legend_position="bottom" isee:transparent="false" isee:hide_border="false" axis_title_font_style="normal" axis_title_font_weight="normal" axis_title_text_decoration="none" axis_title_text_align="center" axis_title_vertical_text_align="center" axis_title_font_color="black" axis_title_font_family="Arial" axis_title_font_size="12pt" axis_title_text_padding="2" axis_title_text_border_color="black" axis_title_text_border_width="thin" axis_title_text_border_style="none" axis_label_font_style="normal" axis_label_font_weight="normal" axis_label_text_decoration="none" axis_label_text_align="center" axis_label_vertical_text_align="center" axis_label_font_color="black" axis_label_font_family="Arial" axis_label_font_size="9pt" axis_label_text_padding="2" axis_label_text_border_color="black" axis_label_text_border_width="thin" axis_label_text_border_style="none">
+					<isee:series_styles>
+						<isee:series_style color="blue" thickness="1"/>
+						<isee:series_style color="red" thickness="1" pen_style="dot_dashed"/>
+						<isee:series_style color="fuchsia" thickness="1" pen_style="dotted"/>
+						<isee:series_style color="#008F44" thickness="1" pen_style="dashed"/>
+						<isee:series_style color="#FF7F00" thickness="1"/>
+						<isee:series_style color="#7F00FF" thickness="1" pen_style="dot_dashed"/>
+						<isee:series_style color="#0CA0FF" thickness="1" pen_style="dotted"/>
+						<isee:series_style color="lime" thickness="1" pen_style="dashed"/>
+						<isee:series_style color="#FF007F" thickness="1"/>
+						<isee:series_style color="aqua" thickness="1" pen_style="dot_dashed"/>
+						<isee:series_style color="#F586FF" thickness="1" pen_style="dotted"/>
+						<isee:series_style color="black" thickness="1" pen_style="dashed"/>
+						<isee:series_style color="#C8C8C8" thickness="1"/>
+					</isee:series_styles>
+				</graph>
+				<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
+				<button color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595"/>
+				<isee:annotation color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595" popup_corner_radius="0" popup_background_color="#FFFECF"/>
+				<slider color="#66CC66" background="#E0E0E0" font_size="12pt" num_ticks="3" label_side="top" wrap_title="true" vertical="false" isee:fancy_appearance="false" isee:show_hover_tip="when_deciding" input_expands="true" input_width="100"/>
+				<isee:stacked_container color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" padding="6 8" border_color="#999999" border_width="thin" border_style="solid" item_spacing="0" corner_radius="4" selected_item_color="black" selected_item_background="white" item_background="#DDDDDD" transparent_bg="false"/>
+				<isee:dual_slider color="#66CC66" background="silver" font_size="12pt" num_ticks="3" label_side="top" wrap_title="true" isee:show_hover_tip="when_deciding" input_expands="true" input_width="100"/>
+				<isee:sim_speed_slider color="black" background="white"/>
+				<isee:time_slider color="#E95F74" background="silver"/>
+				<isee:pie_input color="black" background="white" font_size="12pt" legend_position="bottom" isee:transparent="false"/>
+				<knob color="#66CC66" background="#E0E0E0" font_size="12pt" label_side="bottom" wrap_title="true"/>
+				<numeric_input color="black" background="#E0E0E0" font_size="12pt" label_side="left" wrap_title="true" input_expands="false" input_width="100"/>
+				<numeric_input color="black" background="white" font_size="12pt" label_side="left" wrap_title="true" input_expands="false" input_width="100"/>
+				<switch color="black" background="#E0E0E0" font_size="12pt" label_side="top" wrap_title="true" isee:appearance="switch" isee:on_color="green"/>
+				<options color="black" background="white" appearance="radio-buttons" arrangement="vertical"/>
+				<graphical_input color="black" background="#E0E0E0" font_size="12pt" isee:show_hover_tip="true"/>
+				<group_input color="black" background="#E0E0E0" font_size="12pt"/>
+				<lamp color="black" background="white" font_size="9pt"/>
+				<gauge color="black" background="white" font_size="9pt" needle_color="#F09F72" bar_color="#EEEEEE" bar_progress_color="black" appearance="radial" num_major_ticks="11" num_minor_ticks="11" show_numeric_value="true"/>
+				<isee:spatial_map color="black" background="white" font_size="12pt"/>
+				<isee:animation_object color="black" background="white" font_size="12pt"/>
+				<isee:navigation_widget color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" padding="6 8" border_color="#999999" border_width="thin" border_style="solid" item_spacing="6" appearance="tabs" corner_radius="4" selected_item_color="black" selected_item_background="white" item_background="#DDDDDD" transparent_bg="false"/>
+				<isee:shape color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid" opacity="1" transparent_background="true" corner_radius="1"/>
+				<isee:selector color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
+				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
+			</style>
+			<view isee:show_pages="false" background="white" page_width="1056" page_height="816" isee:page_cols="3" isee:page_rows="3" isee:scroll_y="60" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
+				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
+					<stock color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
+						<shape type="rectangle" width="45" height="35"/>
+					</stock>
+					<flow color="blue" background="white" font_color="blue" font_size="9pt" label_side="bottom">
+						<shape type="circle" radius="18"/>
+					</flow>
+					<isee:placeholder color="#228B22" background="white" font_color="#228B22" font_size="9pt" label_side="bottom"/>
+					<module color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
+						<shape type="rectangle" width="55" height="45"/>
+					</module>
+					<aux color="blue" background="white" font_color="blue" font_size="9pt" label_side="bottom">
+						<shape type="circle" radius="18"/>
+					</aux>
+					<group color="red" background="white" font_color="red" font_size="9pt"/>
+					<connector color="#FF007F" background="white" font_color="#FF007F" font_size="9pt" isee:thickness="1"/>
+					<text_box color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+					<isee:loop_indicator color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+					<numeric_display color="white" background="white" font_size="12pt" border_width="thin" border_style="solid" isee:transparent="false" isee:show_divider="true" isee:show_bounding_box="true" label_side="left"/>
+					<graph color="black" background="white" font_size="12pt" axis_color="#666666" grid_color="#C8C8C8" isee:graph_area_color="white" legend_position="bottom" isee:transparent="false" isee:hide_border="false" axis_title_font_style="normal" axis_title_font_weight="normal" axis_title_text_decoration="none" axis_title_text_align="center" axis_title_vertical_text_align="center" axis_title_font_color="black" axis_title_font_family="Arial" axis_title_font_size="12pt" axis_title_text_padding="2" axis_title_text_border_color="black" axis_title_text_border_width="thin" axis_title_text_border_style="none" axis_label_font_style="normal" axis_label_font_weight="normal" axis_label_text_decoration="none" axis_label_text_align="center" axis_label_vertical_text_align="center" axis_label_font_color="black" axis_label_font_family="Arial" axis_label_font_size="9pt" axis_label_text_padding="2" axis_label_text_border_color="black" axis_label_text_border_width="thin" axis_label_text_border_style="none">
+						<isee:series_styles>
+							<isee:series_style color="blue" thickness="1"/>
+							<isee:series_style color="red" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="fuchsia" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="#008F44" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#FF7F00" thickness="1"/>
+							<isee:series_style color="#7F00FF" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="#0CA0FF" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="lime" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#FF007F" thickness="1"/>
+							<isee:series_style color="aqua" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="#F586FF" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="black" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#C8C8C8" thickness="1"/>
+						</isee:series_styles>
+					</graph>
+					<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="beginning" report_flows="instantaneous" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
+				</style>
+				<stock label_side="center" x="355.5" y="155.5" width="60" height="32" name="Restoration"/>
+				<flow x="279.25" y="168" name="Change Restoration">
+					<pts>
+						<pt x="191" y="168"/>
+						<pt x="355.5" y="168"/>
+					</pts>
+				</flow>
+				<stock label_side="center" x="701.5" y="265.5" width="61" height="36" name="Production"/>
+				<flow x="640.25" y="278" name="Change Production">
+					<pts>
+						<pt x="567" y="278"/>
+						<pt x="701.5" y="278"/>
+					</pts>
+				</flow>
+				<stock label_side="center" x="305" y="367" name="Pollution"/>
+				<flow x="221.25" y="362" name="Change Pollution">
+					<pts>
+						<pt x="148" y="362"/>
+						<pt x="282.5" y="362"/>
+					</pts>
+				</flow>
+				<stock label_side="center" x="323.25" y="538.5" name="Education"/>
+				<flow x="247.375" y="529" name="Change Education">
+					<pts>
+						<pt x="182" y="529"/>
+						<pt x="300.75" y="529"/>
+					</pts>
+				</flow>
+				<stock label_side="center" x="672.5" y="526.5" width="57" height="34" name="Life Quality"/>
+				<flow x="611.25" y="539" name="Change Life Quality">
+					<pts>
+						<pt x="538" y="539"/>
+						<pt x="672.5" y="539"/>
+					</pts>
+				</flow>
+				<stock label_side="center" x="407" y="773" name="Birth rate"/>
+				<flow x="323.25" y="768" name="Change Birth rate">
+					<pts>
+						<pt x="250" y="768"/>
+						<pt x="384.5" y="768"/>
+					</pts>
+				</flow>
+				<stock label_side="center" x="820.5" y="855.5" width="58" height="35" name="Population"/>
+				<flow label_side="top" x="759.25" y="868" name="Change Population">
+					<pts>
+						<pt x="686" y="868"/>
+						<pt x="820.5" y="868"/>
+					</pts>
+				</flow>
+				<aux label_side="left" x="280.25" y="225" name="Effect of restoration\non Pollution"/>
+				<connector uid="1" angle="197.319">
+					<from>Restoration</from>
+					<to>Effect_of_restoration_on_Pollution</to>
+				</connector>
+				<connector uid="2" angle="214.095">
+					<from>Effect_of_restoration_on_Pollution</from>
+					<to>Change_Pollution</to>
+				</connector>
+				<aux label_side="top" x="322" y="111" name="Effect of restoration\non restoration"/>
+				<connector uid="3" angle="204.775">
+					<from>Effect_of_restoration_on_restoration</from>
+					<to>Change_Restoration</to>
+				</connector>
+				<connector uid="4" angle="101.31">
+					<from>Restoration</from>
+					<to>Effect_of_restoration_on_restoration</to>
+				</connector>
+				<aux x="741" y="346" name="Effect of Production\non Production"/>
+				<connector uid="5" angle="275.194">
+					<from>Production</from>
+					<to>Effect_of_Production_on_Production</to>
+				</connector>
+				<connector uid="6" angle="189.462">
+					<from>Effect_of_Production_on_Production</from>
+					<to>Change_Production</to>
+				</connector>
+				<aux x="459" y="260" name="Effect of Production\non Pollution"/>
+				<connector uid="7" angle="113.199">
+					<from>Production</from>
+					<to>Effect_of_Production_on_Pollution</to>
+				</connector>
+				<connector uid="8" angle="164.055">
+					<from>Effect_of_Production_on_Pollution</from>
+					<to>Change_Pollution</to>
+				</connector>
+				<aux label_side="bottom" x="218.25" y="435.5" name="Effect of Pollution\non Pollution"/>
+				<connector uid="9" angle="249.444">
+					<from>Pollution</from>
+					<to>Effect_of_Pollution_on_Pollution</to>
+				</connector>
+				<connector uid="10" angle="138.366">
+					<from>Effect_of_Pollution_on_Pollution</from>
+					<to>Change_Pollution</to>
+				</connector>
+				<aux label_side="top" x="323.25" y="460" name="Effect of Education\non Education"/>
+				<connector uid="13" angle="42.022">
+					<from>Education</from>
+					<to>Effect_of_Education_on_Education</to>
+				</connector>
+				<connector uid="14" angle="196.164">
+					<from>Effect_of_Education_on_Education</from>
+					<to>Change_Education</to>
+				</connector>
+				<aux label_side="bottom" x="520" y="596.5" name="Effect of Education\non Life Quality"/>
+				<connector uid="15" angle="318.701">
+					<from>Education</from>
+					<to>Effect_of_Education_on_Life_Quality</to>
+				</connector>
+				<connector uid="16" angle="7.49586">
+					<from>Effect_of_Education_on_Life_Quality</from>
+					<to>Change_Life_Quality</to>
+				</connector>
+				<aux label_side="left" x="289.25" y="698" name="Effect of Education\non Birth rate"/>
+				<connector uid="17" angle="212.32">
+					<from>Education</from>
+					<to>Effect_of_Education_on_Birth_rate</to>
+				</connector>
+				<connector uid="18" angle="268.807">
+					<from>Effect_of_Education_on_Birth_rate</from>
+					<to>Change_Birth_rate</to>
+				</connector>
+				<aux label_side="top" x="664.5" y="435.5" name="Effect of Life Quality\non Life Quality"/>
+				<connector uid="19" angle="90">
+					<from>Life_Quality</from>
+					<to>Effect_of_Life_Quality_on_Life_Quality</to>
+				</connector>
+				<connector uid="20" angle="222.397">
+					<from>Effect_of_Life_Quality_on_Life_Quality</from>
+					<to>Change_Life_Quality</to>
+				</connector>
+				<aux label_side="top" x="399" y="698" name="Effect of Life Quality\non Birth rate"/>
+				<connector uid="21" angle="246.571">
+					<from>Life_Quality</from>
+					<to>Effect_of_Life_Quality_on_Birth_rate</to>
+				</connector>
+				<connector uid="22" angle="187.125">
+					<from>Effect_of_Life_Quality_on_Birth_rate</from>
+					<to>Change_Birth_rate</to>
+				</connector>
+				<stock label_side="center" x="866" y="733.5" name="Politic"/>
+				<flow x="802.75" y="745" name="Change in Politic">
+					<pts>
+						<pt x="750" y="745"/>
+						<pt x="843.5" y="745"/>
+					</pts>
+				</flow>
+				<aux label_side="right" label_angle="45" x="715.5" y="647" name="Effect of Life\nQuality on Politic"/>
+				<connector uid="23" angle="268.636">
+					<from>Life_Quality</from>
+					<to>Effect_of_Life_Quality_on_Politic</to>
+				</connector>
+				<connector uid="24" angle="282.804">
+					<from>Effect_of_Life_Quality_on_Politic</from>
+					<to>Change_in_Politic</to>
+				</connector>
+				<aux label_side="bottom" x="575" y="880" name="Effect of Birth\nrate on population"/>
+				<connector uid="25" angle="292.782">
+					<from>Birth_rate</from>
+					<to>Effect_of_Birth_rate_on_population</to>
+				</connector>
+				<connector uid="26" angle="344.055">
+					<from>Effect_of_Birth_rate_on_population</from>
+					<to>Change_Population</to>
+				</connector>
+				<aux label_side="top" x="488.5" y="383" name="Effect of Pollution\non Life Quality"/>
+				<connector uid="28" angle="329.349">
+					<from>Effect_of_Pollution_on_Life_Quality</from>
+					<to>Change_Life_Quality</to>
+				</connector>
+				<aux label_side="right" x="1040.5" y="604" name="Effect of Population\non Action Points"/>
+				<connector uid="29" angle="15.9454">
+					<from>Population</from>
+					<to>Effect_of_Population_on_Action_Points</to>
+				</connector>
+				<aux label_side="left" label_angle="135" x="972" y="470.5" name="Effect of Politic\non Action Points"/>
+				<connector uid="31" angle="53.0224">
+					<from>Politic</from>
+					<to>Effect_of_Politic_on_Action_Points</to>
+				</connector>
+				<aux label_side="top" x="907" y="233.5" name="Effect of Production\non Action Points"/>
+				<connector uid="33" angle="45">
+					<from>Production</from>
+					<to>Effect_of_Production_on_Action_Points</to>
+				</connector>
+				<aux x="897.5" y="356" name="Effect of Life Qulilty\non Action Points"/>
+				<connector uid="35" angle="78.9965">
+					<from>Life_Quality</from>
+					<to>Effect_of_Life_Qulilty_on_Action_Points</to>
+				</connector>
+				<aux label_side="top" x="244.25" y="129" name="Action point to resroration"/>
+				<aux label_side="top" x="611.25" y="239" name="Action point to Production"/>
+				<aux x="98" y="389.5" name="Action point to Pollution"/>
+				<connector uid="37" angle="311.906">
+					<from>Action_point_to_resroration</from>
+					<to>Change_Restoration</to>
+				</connector>
+				<aux x="142" y="529" name="Action point to Education"/>
+				<aux label_side="left" label_angle="135" x="544" y="488.5" name="Action point to Life Quality"/>
+				<connector uid="45" angle="306.634">
+					<from>Action_point_to_Production</from>
+					<to>Change_Production</to>
+				</connector>
+				<connector uid="46" angle="70.1679">
+					<from>Action_point_to_Pollution</from>
+					<to>Change_Pollution</to>
+				</connector>
+				<connector uid="47" angle="41.0353">
+					<from>Action_point_to_Education</from>
+					<to>Change_Education</to>
+				</connector>
+				<connector uid="48" angle="323.096">
+					<from>Action_point_to_Life_Quality</from>
+					<to>Change_Life_Quality</to>
+				</connector>
+				<stacked_container uid="49" x="1356" y="383">
+					<graph width="350" height="250" type="time_series" show_grid="false" isee:tick_type="none" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" isee:show_pie_borders="true" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" isee:allow_zero_axis="true" left_axis_multi_scale="false" left_axis_auto_scale="true" left_include_units="true" right_axis_multi_scale="false" right_axis_auto_scale="true" right_include_units="true">
+						<plot color="blue" isee:keep_zero_visible="true" pen_width="1" index="0" show_y_axis="true">
+							<entity name="Action_points"/>
+						</plot>
+					</graph>
+				</stacked_container>
+				<aux label_side="left" label_angle="135" x="255.25" y="737.5" name="Action point to Birth rate"/>
+				<connector uid="53" angle="335.842">
+					<from>Action_point_to_Birth_rate</from>
+					<to>Change_Birth_rate</to>
+				</connector>
+				<connector uid="56" angle="11.3099">
+					<from>Pollution</from>
+					<to>Effect_of_Pollution_on_Life_Quality</to>
+				</connector>
+				<aux label_side="right" label_angle="45" x="1096.5" y="310.5" name="Action points"/>
+				<connector uid="59" angle="355.711">
+					<from>Effect_of_Production_on_Action_Points</from>
+					<to>Action_points</to>
+				</connector>
+				<connector uid="60" angle="43.2643">
+					<from>Effect_of_Life_Qulilty_on_Action_Points</from>
+					<to>Action_points</to>
+				</connector>
+				<connector uid="61" angle="38.9275">
+					<from>Effect_of_Politic_on_Action_Points</from>
+					<to>Action_points</to>
+				</connector>
+				<connector uid="62" angle="67.0679">
+					<from>Effect_of_Population_on_Action_Points</from>
+					<to>Action_points</to>
+				</connector>
+			</view>
+		</views>
+	</model>
+</xmile>
+
